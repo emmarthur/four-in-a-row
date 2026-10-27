@@ -1,0 +1,250 @@
+:root {
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-display: "Outfit", var(--font-body);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #f8fafc;
+  --text-muted: #cbd5e1;
+  --accent: #f97316;
+  --accent-2: #38bdf8;
+  --board-bg: #1e3a8a;
+  --board-slot: #0f172a;
+  --x-color: #f87171;
+  --o-color: #facc15;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: linear-gradient(165deg, #0c4a6e 0%, #1e1b4b 55%, #7c2d12 100%);
+  background-attachment: fixed;
+}
+
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-a {
+  width: 300px;
+  height: 300px;
+  background: var(--accent);
+  top: -50px;
+  right: -40px;
+}
+
+.bg-blob-b {
+  width: 280px;
+  height: 280px;
+  background: var(--accent-2);
+  bottom: -40px;
+  left: -30px;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.page-help {
+  max-width: 38rem;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fed7aa;
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.12);
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.hero-badge {
+  font-size: 2rem;
+  margin-bottom: 0.35rem;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  margin: 0 0 0.35rem;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(8px);
+}
+
+.status-card {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.turn-text {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.result-text {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.result-text.is-win {
+  color: #86efac;
+}
+
+.result-text.is-tie {
+  color: #fde68a;
+}
+
+.error {
+  margin: 0 0 0.5rem;
+  color: #fca5a5;
+  font-size: 0.9rem;
+}
+
+.btn {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0.55rem;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.board-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.board {
+  background: var(--board-bg);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  border: 3px solid #1d4ed8;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.board-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.board-row + .board-row {
+  margin-top: 0.35rem;
+}
+
+.cell {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: var(--board-slot);
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.cell.is-x::after,
+.cell.is-o::after {
+  content: "";
+  position: absolute;
+  inset: 0.2rem;
+  border-radius: 50%;
+}
+
+.cell.is-x::after {
+  background: radial-gradient(circle at 30% 30%, #fecaca, var(--x-color));
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cell.is-o::after {
+  background: radial-gradient(circle at 30% 30%, #fef08a, var(--o-color));
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cell.is-last {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+
+.column-buttons {
+  display: flex;
+  gap: 0.35rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.col-btn {
+  flex: 1;
+  max-width: 2.5rem;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.45rem 0;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.15);
+  color: #e0f2fe;
+  cursor: pointer;
+}
+
+.col-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.help h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.help p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.help + .help {
+  margin-top: 0.75rem;
+}
